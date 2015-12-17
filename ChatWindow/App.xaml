@@ -1,0 +1,8 @@
+﻿<Application x:Class="Peer2PeerChat.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:local="clr-namespace:Peer2PeerChat"
+             xmlns:m="clr-namespace:Peer2PeerChat.Models">
+    <Application.Resources>
+    </Application.Resources>
+</Application>

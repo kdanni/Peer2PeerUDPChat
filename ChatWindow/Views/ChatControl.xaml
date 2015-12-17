@@ -1,0 +1,81 @@
+﻿<UserControl x:Class="Peer2PeerChat.Views.ChatControl"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             xmlns:local="clr-namespace:Peer2PeerChat.Views"
+             xmlns:vm="clr-namespace:Peer2PeerChat.ViewModels"
+             xmlns:m="clr-namespace:Peer2PeerChat.Models"
+             xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+             mc:Ignorable="d" 
+             d:DesignHeight="400" d:DesignWidth="680">
+
+    <UserControl.Resources>
+        <!-- In your resources section of the XAML -->
+        <BooleanToVisibilityConverter x:Key="BoolToVis" />
+
+        <DataTemplate DataType="{x:Type m:Message}">
+            <TextBlock>
+                <TextBlock Text="[" />
+                <TextBlock Text="{Binding Path=LocalTimestamp, StringFormat={}{0:HH\:mm\:ss}}" />
+                <TextBlock Text="] " />
+                <TextBlock Text="*" Foreground="ForestGreen"  Visibility="{Binding Path=Chatter.ThisIsMe , Converter={StaticResource BoolToVis}}"/>
+                <TextBlock Text="{Binding Path=Chatter.Nick}" FontWeight="Bold" MaxWidth="100"/>
+                <TextBlock Text="*" Foreground="ForestGreen"  Visibility="{Binding Path=Chatter.ThisIsMe , Converter={StaticResource BoolToVis}}"/>
+                <TextBlock Text=" - " />
+                <TextBlock Text="{Binding Path=TextMessage}" />                    
+            </TextBlock>
+        </DataTemplate>
+
+        <DataTemplate DataType="{x:Type m:Chatter}">
+            <TextBlock>
+                <TextBlock Text="*" Foreground="ForestGreen"  Visibility="{Binding Path=ThisIsMe, Converter={StaticResource BoolToVis}}"/>
+                <TextBlock Text="{Binding Path=Nick}" />                    
+                <TextBlock Text="*" Foreground="ForestGreen" Visibility="{Binding Path=ThisIsMe, Converter={StaticResource BoolToVis}}"/>
+            </TextBlock>
+        </DataTemplate>
+
+    </UserControl.Resources>
+
+    <Grid Name="mainChatGrid"
+        FocusManager.FocusedElement="{Binding ElementName=messageTextBox}">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="40" />
+        </Grid.RowDefinitions>
+        <Grid>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="3*" />
+                <ColumnDefinition Width="1*" />
+            </Grid.ColumnDefinitions>
+
+            <ScrollViewer Name="messageFlowScroll" >
+                <ListView Name="messageFlowListView"
+                          ItemsSource="{Binding Path=MessageFlow}">
+                </ListView>
+            </ScrollViewer>
+            <ScrollViewer Grid.Column="1">
+                <ListView Name="chatterListView" 
+                          ItemsSource="{Binding Path=ChatterList}">
+                </ListView>
+            </ScrollViewer>
+        </Grid>
+        <Grid  Grid.Row="1">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="5*" />
+                <ColumnDefinition Width="{Binding Path=SendbuttonWidth, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" />
+            </Grid.ColumnDefinitions>
+
+            <TextBox Name="messageTextBox" Margin="5" Padding="5 5 5 0"
+                     Text="{Binding Path=MessageText, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}" >
+                <TextBox.InputBindings>
+                    <KeyBinding Key="Enter" Command="{Binding Path=SendCommand}"/>
+                    <KeyBinding Key="Up" Command="{Binding Path=HistoryCommand}"/>
+                </TextBox.InputBindings>
+            </TextBox>
+
+            <Button Name="messageSubmitButton" Command="{Binding Path=SendCommand}" 
+                    Grid.Column="1" Content="Send" Margin="5" />
+        </Grid>
+    </Grid>
+</UserControl>

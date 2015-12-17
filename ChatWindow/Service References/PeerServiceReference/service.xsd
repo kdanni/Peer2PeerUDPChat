@@ -1,0 +1,46 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://tempuri.org/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:import namespace="http://schemas.microsoft.com/2003/10/Serialization/Arrays" />
+  <xs:element name="registerPeer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="hash" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="clientUri" nillable="true" type="xs:anyURI" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="registerPeerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="registerPeerResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kickoutPeer">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="hash" nillable="true" type="xs:string" />
+        <xs:element minOccurs="0" name="kickerHash" nillable="true" type="xs:string" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="kickoutPeerResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element minOccurs="0" name="kickoutPeerResult" type="xs:boolean" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getPeerList">
+    <xs:complexType>
+      <xs:sequence />
+    </xs:complexType>
+  </xs:element>
+  <xs:element name="getPeerListResponse">
+    <xs:complexType>
+      <xs:sequence>
+        <xs:element xmlns:q1="http://schemas.microsoft.com/2003/10/Serialization/Arrays" minOccurs="0" name="getPeerListResult" nillable="true" type="q1:ArrayOfanyURI" />
+      </xs:sequence>
+    </xs:complexType>
+  </xs:element>
+</xs:schema>
