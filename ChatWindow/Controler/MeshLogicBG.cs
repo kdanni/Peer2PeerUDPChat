@@ -269,6 +269,7 @@ namespace Peer2PeerChat.Controler
                     if (!success)
                     {
                         Debug.WriteLine("Nick registration failed.");
+                        ChatViewModel.ApplicationMessageInvokeDispatcher("The nick can not be used by you.");
                         return;
                     }
 
@@ -297,6 +298,7 @@ namespace Peer2PeerChat.Controler
                 else
                 {
                     NoNickServer = true;
+                    ChatViewModel.ApplicationMessageInvokeDispatcher("No nickserver available.");
                 }
 
             }
