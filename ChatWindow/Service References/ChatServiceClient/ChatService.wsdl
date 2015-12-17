@@ -19,6 +19,9 @@
   <wsdl:message name="IChatService_Chat_InputMessage">
     <wsdl:part name="parameters" element="tns:Chat" />
   </wsdl:message>
+  <wsdl:message name="IChatService_Wishper_InputMessage">
+    <wsdl:part name="parameters" element="tns:Wishper" />
+  </wsdl:message>
   <wsdl:message name="IChatService_Bye_InputMessage">
     <wsdl:part name="parameters" element="tns:Bye" />
   </wsdl:message>
@@ -28,6 +31,9 @@
     </wsdl:operation>
     <wsdl:operation name="Chat">
       <wsdl:input wsaw:Action="http://tempuri.org/IChatService/Chat" message="tns:IChatService_Chat_InputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Wishper">
+      <wsdl:input wsaw:Action="http://tempuri.org/IChatService/Wishper" message="tns:IChatService_Wishper_InputMessage" />
     </wsdl:operation>
     <wsdl:operation name="Bye">
       <wsdl:input wsaw:Action="http://tempuri.org/IChatService/Bye" message="tns:IChatService_Bye_InputMessage" />
@@ -43,6 +49,12 @@
     </wsdl:operation>
     <wsdl:operation name="Chat">
       <soap:operation soapAction="http://tempuri.org/IChatService/Chat" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Wishper">
+      <soap:operation soapAction="http://tempuri.org/IChatService/Wishper" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -65,6 +77,12 @@
     </wsdl:operation>
     <wsdl:operation name="Chat">
       <soap12:operation soapAction="http://tempuri.org/IChatService/Chat" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+    </wsdl:operation>
+    <wsdl:operation name="Wishper">
+      <soap12:operation soapAction="http://tempuri.org/IChatService/Wishper" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

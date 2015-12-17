@@ -27,6 +27,12 @@ namespace Peer2PeerChat.ChatServiceClient {
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/Chat")]
         System.Threading.Tasks.Task ChatAsync(string message, string mac_hash);
         
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/Wishper")]
+        void Wishper(string message, string mac_hash);
+        
+        [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/Wishper")]
+        System.Threading.Tasks.Task WishperAsync(string message, string mac_hash);
+        
         [System.ServiceModel.OperationContractAttribute(IsOneWay=true, Action="http://tempuri.org/IChatService/Bye")]
         void Bye(string mac_hash);
         
@@ -75,6 +81,14 @@ namespace Peer2PeerChat.ChatServiceClient {
         
         public System.Threading.Tasks.Task ChatAsync(string message, string mac_hash) {
             return base.Channel.ChatAsync(message, mac_hash);
+        }
+        
+        public void Wishper(string message, string mac_hash) {
+            base.Channel.Wishper(message, mac_hash);
+        }
+        
+        public System.Threading.Tasks.Task WishperAsync(string message, string mac_hash) {
+            return base.Channel.WishperAsync(message, mac_hash);
         }
         
         public void Bye(string mac_hash) {

@@ -1,6 +1,7 @@
 ﻿using Peer2PeerChat.Models;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace Peer2PeerChat.Controler
 {
@@ -18,7 +19,6 @@ namespace Peer2PeerChat.Controler
                 {
                     if (peer.Address.Equals(address) && peer.Chatter.Nick.Equals(nick))
                     {
-                        registrationRespondWorker.RunWorkerAsync(peer.UdpAddress);
                         return;
                     }
 
@@ -60,7 +60,7 @@ namespace Peer2PeerChat.Controler
             }
         }
 
-        public void handleChatMessage(string message, string mac_hash)
+        public void handleChatMessage(string message, string mac_hash, bool isPublic)
         {
             if (message == null || mac_hash == null)
                 return;
@@ -70,11 +70,13 @@ namespace Peer2PeerChat.Controler
             if (peer == null)
                 return;
 
+            var type = isPublic ? MessageType.Public : MessageType.Private;
+
             var messageObject = new Models.Message()
             {
                 Chatter = peer.Chatter,
                 TextMessage = message,
-                Type = MessageType.Public,
+                Type = type,
                 UtcTimestamp = DateTime.UtcNow
             };
 
@@ -86,6 +88,8 @@ namespace Peer2PeerChat.Controler
 
         public void removePeer(string mac_hash)
         {
+            Debug.WriteLine("Remove peer " + mac_hash);
+
             if (mac_hash == null)
                 return;
 
@@ -94,8 +98,10 @@ namespace Peer2PeerChat.Controler
             if (peer == null)
                 return;
 
-            ChatViewModel.ChatterList.Remove(peer.Chatter);
+            Action a = () => ChatViewModel.ChatterList.Remove(peer.Chatter);
+            ChatViewModel.InvokeDispatcher(a);
             Mesh.Remove(mac_hash);
+            ChatViewModel.ApplicationMessageInvokeDispatcher("Chatter left.");
         }
     }
 }

@@ -102,6 +102,30 @@ namespace Peer2PeerChat.ViewModels
                 {
                     Chatter = Application,
                     UtcTimestamp = DateTime.UtcNow,
+                    TextMessage = "/nick <my_new_nick>\tChange nick.",
+                    Type = MessageType.Meta
+                });
+            theList.Add(
+                new Message
+                {
+                    Chatter = Application,
+                    UtcTimestamp = DateTime.UtcNow,
+                    TextMessage = "/msg <a_nick>\tSend private message, won't work with Anonymous.",
+                    Type = MessageType.Meta
+                });
+            theList.Add(
+                new Message
+                {
+                    Chatter = Application,
+                    UtcTimestamp = DateTime.UtcNow,
+                    TextMessage = "/discovery\tFind chatters on local network.",
+                    Type = MessageType.Meta
+                });
+            theList.Add(
+                new Message
+                {
+                    Chatter = Application,
+                    UtcTimestamp = DateTime.UtcNow,
                     TextMessage = "/exit\tClose the application.",
                     Type = MessageType.Meta
                 });

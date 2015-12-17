@@ -19,14 +19,14 @@ namespace Peer2PeerChat.ViewModels
         {
             ChatterList = new ObservableCollection<Chatter>();
             MessageFlow = new ObservableCollection<Message>();
-            
+
             ChatterList.Add(Self);
             MeshLogic = new MeshLogic(this);
             MeshLogic.startupAsync();
 
             MessageText = "";
             SendbuttonWidth = new GridLength(0, GridUnitType.Star);
-            foreach (Message m in GetWelcomeMessage()) { 
+            foreach (Message m in GetWelcomeMessage()) {
                 MessageFlow.Add(m);
             }
             _dispatcher = Dispatcher.CurrentDispatcher;
@@ -36,19 +36,6 @@ namespace Peer2PeerChat.ViewModels
         {
             MessageText = (_history==null)?"":_history;
             _history = null;
-        }
-
-        private void Help()
-        {
-            foreach (Message m in GetHelpMessage())
-            {
-                MessageFlow.Add(m);
-            }
-        }
-
-        private void Exit()
-        {
-            System.Windows.Application.Current.Shutdown();
         }
 
         private void EasyAccess()
@@ -65,14 +52,43 @@ namespace Peer2PeerChat.ViewModels
 
         private void HandleChatCommand()
         {
+            if (MessageText != null && MessageText.StartsWith("/nick "))
+            {
+                MeshLogic.changeNickAsync(MessageText);
+                return;
+            }
+            if (MessageText != null && MessageText.StartsWith("/msg "))
+            {
+                MeshLogic.sendPrivateMessageAsync(MessageText);
+
+                var m = new Message()
+                {
+                    Chatter = Self,
+                    TextMessage = MessageText,
+                    UtcTimestamp = DateTime.UtcNow,
+                    Type = MessageType.Private
+                };
+
+                MessageFlow.Add(m);
+
+                return;
+            }
+            if ("/discovery".Equals(MessageText))
+            {
+                MeshLogic.discoveryAsync();
+                return;
+            }
             if ("/help".Equals(MessageText))
             {
-                Help();
+                foreach (Message m in GetHelpMessage())
+                {
+                    MessageFlow.Add(m);
+                }
                 return;                    
             }
             if ("/exit".Equals(MessageText))
             {
-                Exit();
+                System.Windows.Application.Current.Shutdown();
                 return;
             }
             if ("/ea".Equals(MessageText))
@@ -89,6 +105,9 @@ namespace Peer2PeerChat.ViewModels
             if (MessageText != null && MessageText.StartsWith("/"))
             {
                 HandleChatCommand();
+                _history = MessageText;
+                MessageText = "";
+                return;
             }
             else
             {

@@ -22,7 +22,7 @@ namespace Peer2PeerChat.ChatService
                 return;
             try
             {
-                MeshLogic.handleChatMessage(message, mac_hash);
+                MeshLogic.handleChatMessage(message, mac_hash, true);
             }
             catch (Exception e)
             { 
@@ -54,6 +54,20 @@ namespace Peer2PeerChat.ChatService
             }
             catch (Exception e)
             { 
+                Debug.WriteLine(e);
+            }
+        }
+
+        public void Wishper(string message, string mac_hash)
+        {
+            if (MeshLogic == null)
+                return;
+            try
+            {
+                MeshLogic.handleChatMessage(message, mac_hash, false);
+            }
+            catch (Exception e)
+            {
                 Debug.WriteLine(e);
             }
         }

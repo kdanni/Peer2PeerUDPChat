@@ -1,12 +1,7 @@
 ﻿using Peer2PeerChat.ViewModels;
 using Peer2PeerChat.Views;
-using System;
-using System.Collections.Generic;
-using System.Configuration;
-using System.Data;
 using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+using System.Threading;
 using System.Windows;
 
 namespace Peer2PeerChat
@@ -29,5 +24,10 @@ namespace Peer2PeerChat
             
         }
         
+        private void Application_Exit(object sender, ExitEventArgs e)
+        {
+
+            _chatViewModel.MeshLogic.sendBye();
+        }
     }
 }

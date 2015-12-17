@@ -17,6 +17,8 @@ namespace Peer2PeerChat.Controler
         public readonly Peer Self = new Peer { };
 
         public ChatViewModel ChatViewModel { get; set; }
+
+        protected bool NoNickServer { get; set; } = false;
         
         public MeshLogic(ChatViewModel chatViewModel)
         {
@@ -37,9 +39,26 @@ namespace Peer2PeerChat.Controler
             publicMessageSender.RunWorkerAsync(message);
         }
 
+        public void sendPrivateMessageAsync(string message)
+        {
+            privateMessageSender.RunWorkerAsync(message);
+        }
+
+        public void changeNickAsync(string nick)
+        {
+            if (NoNickServer)
+                return;
+            nickReservationWorker.RunWorkerAsync(nick);
+        }
+
         public void discoveryAsync()
         {
             discoveryWorker.RunWorkerAsync();
+        }
+
+        public void nickServerRegistrationAsync()
+        {
+            nickserverRegistrationWorker.RunWorkerAsync();
         }
 
         public void openServiceHost()

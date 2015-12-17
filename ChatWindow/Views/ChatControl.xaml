@@ -20,6 +20,7 @@
                 <TextBlock Text="{Binding Path=LocalTimestamp, StringFormat={}{0:HH\:mm\:ss}}" />
                 <TextBlock Text="] " />
                 <TextBlock Text="*" Foreground="ForestGreen"  Visibility="{Binding Path=Chatter.ThisIsMe , Converter={StaticResource BoolToVis}}"/>
+                <TextBlock Text="!" Foreground="Red"  Visibility="{Binding Path=IsPrivateMessage , Converter={StaticResource BoolToVis}}"/>
                 <TextBlock Text="{Binding Path=Chatter.Nick}" FontWeight="Bold" MaxWidth="100"/>
                 <TextBlock Text="*" Foreground="ForestGreen"  Visibility="{Binding Path=Chatter.ThisIsMe , Converter={StaticResource BoolToVis}}"/>
                 <TextBlock Text=" - " />

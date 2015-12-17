@@ -21,6 +21,8 @@ namespace Peer2PeerChat.Models
 
         public MessageType Type { get; set; }
 
+        public bool IsPrivateMessage { get { return MessageType.Private.Equals(Type);} }
+
         public DateTime UtcTimestamp { get; set; } = DateTime.UtcNow;
 
         public DateTime LocalTimestamp { get { return UtcTimestamp.ToLocalTime(); } }

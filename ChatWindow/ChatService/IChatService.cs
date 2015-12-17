@@ -18,6 +18,9 @@ namespace Peer2PeerChat.ChatService
         void Chat(string message, string mac_hash);
 
         [OperationContract(IsOneWay = true)]
+        void Wishper(string message, string mac_hash);
+
+        [OperationContract(IsOneWay = true)]
         void Bye(string mac_hash);
 
     }
