@@ -86,6 +86,10 @@
     <Compile Include="Commands\EventToCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
     <Compile Include="Controler\MeshLogic.cs" />
+    <Compile Include="Controler\MeshLogicBG.cs" />
+    <Compile Include="Controler\MeshLogicClient.cs" />
+    <Compile Include="Controler\MeshLogicServer.cs" />
+    <Compile Include="Controler\MeshLogicUtil.cs" />
     <Compile Include="Models\Chatter.cs" />
     <Compile Include="Models\Message.cs" />
     <Compile Include="Models\Peer.cs" />

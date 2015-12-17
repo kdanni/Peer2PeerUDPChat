@@ -1,4 +1,4 @@
-﻿using Peer2PeerChat.Logic;
+﻿using Peer2PeerChat.Controler;
 using Peer2PeerChat.Models;
 using System;
 using System.Collections.ObjectModel;
@@ -104,7 +104,7 @@ namespace Peer2PeerChat.ViewModels
             }
             _history = MessageText;
             MessageText = "";
-            MeshLogic.asyncSendPublicMessage(_history);
+            MeshLogic.sendPublicMessageAsync(_history);
         }
     }
 }

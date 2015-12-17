@@ -1,4 +1,4 @@
-﻿using Peer2PeerChat.Logic;
+﻿using Peer2PeerChat.Controler;
 using Peer2PeerChat.ViewModels;
 using System;
 using System.Collections.Generic;
