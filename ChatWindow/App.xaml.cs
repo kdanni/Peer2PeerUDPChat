@@ -28,6 +28,7 @@ namespace Peer2PeerChat
         {
 
             _chatViewModel.MeshLogic.sendBye();
+            _chatViewModel.MeshLogic.closeServiceHost();
         }
     }
 }
